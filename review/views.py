@@ -1,6 +1,5 @@
 import json, jwt, requests, boto3, os, mimetypes
 
-
 from django.core.files.base import ContentFile
 
 from wsgiref.util           import FileWrapper
@@ -28,18 +27,14 @@ from .utils                 import (
     range_re
 )
 from account.models         import User
-from account.utils          import (
-    login_decorator,
-    detoken
-)
+from account.utils          import login_decorator
 
 
 class ReviewView(View):
     def get(self, request):
         try:
-            hotel_name      = request.GET.get("hotel_name",None)
-            user            = User.objects.get(name=request.GET.get("user",None))
-            reviews         = Review.objects.select_related('user').filter(user = user).all()
+            user            = User.objects.get(name=request.GET.get('user'))
+            reviews         = Review.objects.select_related('user').prefetch_related('media_set').filter(user = user).all()
             review_list     = [
                 {
                     'id'    : review.id,
@@ -91,7 +86,7 @@ class ReviewView(View):
                 url     = media_url,
                 review  = review
             ).save()
-            return JsonResponse({"message":"SUCCESS"}, status = 200 )
+            return JsonResponse({"message":"SUCCESS"}, status = 201 )
         except TypeError:
             return JsonResponse({"message":"TYPE_ERROR"}, status = 400 )
         except ValueError:
@@ -100,13 +95,15 @@ class ReviewView(View):
             return JsonResponse({"message":"DOES_NOT_EXIST"}, status = 400 )
         
 class StreamingView(View):
+    
     s3_client = boto3.client(
         's3',
         aws_access_key_id=AWS_ACCESS_KEY_ID,
         aws_secret_access_key=AWS_SECRET_ACCESS_KEY
     )
+
     def get(self, request): 
-        url  = request.GET.get('path',None) 
+        url  = request.GET.get('path') 
         video =url.split('/')[-1]
         path = '/home/bjkim/'+video
         self.s3_client.download_file(AWS_STORAGE_BUCKET_NAME,video,path)

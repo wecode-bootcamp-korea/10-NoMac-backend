@@ -62,7 +62,6 @@ class KakaoLoginView(View):
                 "https://kapi.kakao.com/v2/user/me",
                 headers={"Authorization": f"Bearer {access_token}"},
             )
-            print(profile_request.json())
             profile_json = profile_request.json()
             email = profile_json.get("kakao_account").get("email")
             if email is None:
@@ -96,7 +95,7 @@ class GoogleLoginView(View):
                 user = User.objects.get(email=data['email'])
             user = User.objects.create(
                 email = data['email'],
-                name = data["name"],
+                name = data['name'],
                 login_method=User.LOGIN_GOOGLE
             )
             access_token = jwt.encode({'user':user.id},SECRET_KEY,algorithm=ALGORITHM).decode('utf-8')

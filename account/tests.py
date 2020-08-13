@@ -24,7 +24,15 @@ class UserTest(TestCase):
         }
         response = self.client.post('/account/sign-up', json.dumps(user), content_type = 'application/json')
         self.assertEqual(response.status_code, 200)
-        
+    
+    def test_SignUpView_post_fail(self):
+        user = {
+            'email'     : 'd@example.com',
+            'password'  : 'asdf1234'
+        }
+        response = self.client.post('/account/sign-up', json.dumps(user), content_type = 'application/json')
+        self.assertEqual(response.status_code, 200)
+
     def test_SignInView_post_success(self):
         user = {
             'email'     : 'g@example.com',
