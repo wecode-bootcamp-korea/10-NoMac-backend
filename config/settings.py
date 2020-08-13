@@ -17,6 +17,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'hotels.apps.HotelsConfig',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -136,5 +137,3 @@ AWS_SECRET_ACCESS_KEY = my_settings.AWS_SECRET_ACCESS_KEY
 AWS_STORAGE_BUCKET_NAME = my_settings.AWS_STORAGE_BUCKET_NAME
 
 S3URL = my_settings.S3URL
-
-

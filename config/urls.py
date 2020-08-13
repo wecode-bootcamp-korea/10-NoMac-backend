@@ -5,5 +5,6 @@ from django.urls import (
 
 urlpatterns = [
     path('account',include('account.urls')),
-    path('review',include('review.urls'))
+    path('review',include('review.urls')),
+    path("hotel", include("hotels.urls")),
 ]
