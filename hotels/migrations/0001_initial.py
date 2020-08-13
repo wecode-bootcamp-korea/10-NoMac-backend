@@ -74,17 +74,11 @@ class Migration(migrations.Migration):
                 ('price_sale', models.DecimalField(decimal_places=2, max_digits=10)),
                 ('provider_logo', models.TextField(default='', max_length=1000)),
                 ('label', models.CharField(default='', max_length=255)),
-<<<<<<< HEAD
-            ],
-            options={
-                'db_table': 'hotels_details',
-=======
                 ('reservation_start_at', models.DateField(null=True)),
                 ('reservation_end_at', models.DateField(null=True)),
             ],
             options={
                 'db_table': 'hotel_details',
->>>>>>> 7f7b64497d80c291fd11785d323392a8dae87b31
             },
         ),
         migrations.CreateModel(
@@ -118,58 +112,6 @@ class Migration(migrations.Migration):
                 ('price', models.DecimalField(decimal_places=2, max_digits=10)),
             ],
             options={
-<<<<<<< HEAD
-                'db_table': 'hotels_stars',
-            },
-        ),
-        migrations.CreateModel(
-            name='Hotel_Roomtype',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('hotel_detail', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.Hotel_Detail')),
-                ('roomtype', models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to='hotels.Roomtype')),
-            ],
-            options={
-                'db_table': 'hotels_roomtypes',
-            },
-        ),
-        migrations.CreateModel(
-            name='Hotel_Image',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('hotel_detail', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.Hotel_Detail')),
-                ('image', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.Image')),
-            ],
-            options={
-                'db_table': 'hotels_images',
-            },
-        ),
-        migrations.CreateModel(
-            name='Hotel_Facility',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('facility', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.Facility')),
-                ('hotel_detail', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.Hotel_Detail')),
-            ],
-            options={
-                'db_table': 'hotels_features',
-            },
-        ),
-        migrations.AddField(
-            model_name='hotel_detail',
-            name='star_id',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.Star'),
-        ),
-        migrations.CreateModel(
-            name='Hotel_amenity',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amenity', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.Amenity')),
-                ('hotel_detail', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.Hotel_Detail')),
-            ],
-            options={
-                'db_table': 'hotels_amenities',
-=======
                 'db_table': 'hotel_stars',
             },
         ),
@@ -220,7 +162,6 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'hotel_amenities',
->>>>>>> 7f7b64497d80c291fd11785d323392a8dae87b31
             },
         ),
         migrations.CreateModel(
@@ -228,19 +169,12 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=255)),
-<<<<<<< HEAD
                 ('english_name', models.CharField(max_length=255)),
-=======
->>>>>>> 7f7b64497d80c291fd11785d323392a8dae87b31
                 ('flat', models.CharField(default='', max_length=255)),
                 ('user_rating', models.DecimalField(decimal_places=2, max_digits=10)),
                 ('city', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.City')),
                 ('country', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.Country')),
-<<<<<<< HEAD
-                ('hotel_detail', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.Hotel_Detail')),
-=======
                 ('hotel_detail', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='hotels.HotelDetail')),
->>>>>>> 7f7b64497d80c291fd11785d323392a8dae87b31
             ],
             options={
                 'db_table': 'hotels',
